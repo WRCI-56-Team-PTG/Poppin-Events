@@ -48,15 +48,25 @@ router.delete(
   (req, res) => res.sendStatus(200),
 );
 
+<<<<<<< HEAD
+router.get('/userEventData/:userId',
+=======
 router.get('/userEventData/:userID',
+>>>>>>> dev
   eventController.getUsersEvents,
   (req, res) => res.status(200).json(res.locals.usersEvents),
 );
 
 // Create an attendee in the database
+<<<<<<< HEAD
+router.post('/attendees/:userId',
+  attendeeController.addAttendee,
+  eventController.getUsersEvents,
+=======
 router.post('/attendees/:eventID',
   attendeeController.addAttendee,
   eventController.getEvents,
+>>>>>>> dev
   (req, res) => res.status(200).json(res.locals.usersEvents),
 );
 
@@ -69,13 +79,13 @@ router.get('/attendees/:eventID',
 );
 
 // stretch goal
-// router.delete('/attendees/:eventId',
-//   attendeeController.deleteAttendee,
-//   (req, res) => {
-//     // should we return the deletedAttendee?
-//     res.sendStatus(200)
-//   },
-// );
+router.delete('/attendees/:userId',
+  attendeeController.deleteAttendee,
+  (req, res) => {
+    // should we return the deletedAttendee?
+    res.sendStatus(200)
+  },
+);
 
 // Checks for active sessions
 router.get(
