@@ -12,8 +12,8 @@ import EventList from './EventList.jsx';
 function Map() {
   // state for map center positioning
   const [mapPos, setMapPos] = useState({
-    lat: 0.37766641e2,
-    lng: -0.123098308e3,
+    lat: 37.772,
+    lng: -122.431,
   });
 
   // state for the data for marker from the database
@@ -140,7 +140,7 @@ function Map() {
         )}
       </div>
       <GoogleMap
-        zoom={14}
+        zoom={12}
         center={mapPos}
         mapContainerClassName="map-container box-shadow-1"
       >

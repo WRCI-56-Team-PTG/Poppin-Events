@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React from 'react';
 import axios from 'axios';
 
 function RSVPButton(props) {
@@ -16,7 +16,7 @@ function RSVPButton(props) {
 
     try {
       if (deleteRSVP) {
-        const response = await axios.post(
+        const response = await axios.delete(
           `/api/attendees/${props.eventData.id}`,
           messageBody
         );
