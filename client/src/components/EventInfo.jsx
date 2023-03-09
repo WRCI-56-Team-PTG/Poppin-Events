@@ -67,12 +67,12 @@ const EventInfo = function ({
           {/* Otherwise, display the RSVP component */}
           {eventData.email !== user.email && (
             <>
-              {/* <RSVPButton
+              <RSVPButton
                 eventData={eventData}
                 user={user}
                 userEventList={userEventList}
                 setUserEventList={setUserEventList}
-              /> */}
+              />
               <button
                 className="event-info__close-btn--rsvp"
                 onClick={closeEditInfoHandler}

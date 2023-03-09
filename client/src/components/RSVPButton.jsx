@@ -7,22 +7,22 @@ function RSVPButton(props) {
 
   // If the event shown is already on the user's event list, show option to cancel
   if (props.userEventList.includes(props.eventData.id)) {
-    buttonText = 'CANCEL RSVP'
+    buttonText = 'CANCEL RSVP';
     deleteRSVP = true;
-  } else buttonText = 'RSVP'
+  } else buttonText = 'RSVP';
 
   async function handleClick(e) {
-    const messageBody = { userId: props.user.id };
+    const messageBody = { eventId: props.eventData.id };
     let response;
     try {
       if (deleteRSVP) {
         response = await axios.delete(
-          `/api/attendees/${props.eventData.id}`,
+          `/api/attendees/${props.user.id}`,
           messageBody
         );
       } else {
         response = await axios.post(
-          `/api/attendees/${props.eventData.id}`,
+          `/api/attendees/${props.user.id}`,
           messageBody
         );
       }
