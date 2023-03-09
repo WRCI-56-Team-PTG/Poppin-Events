@@ -130,12 +130,14 @@ function Map() {
   return (
     <div className="map-section">
       <div className="left-section">
-        <EventList
-          userEventList={userEventList}
-          markerData={markerData}
-          setEventData={setEventData}
-          user={user}
-        />
+        {user && (
+          <EventList
+            userEventList={userEventList}
+            markerData={markerData}
+            setEventData={setEventData}
+            user={user}
+          />
+        )}
       </div>
       <GoogleMap
         zoom={14}

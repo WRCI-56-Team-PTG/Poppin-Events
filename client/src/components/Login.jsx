@@ -23,6 +23,7 @@ const Login = (props) => {
         email,
         picture,
       });
+      console.log(res);
       // reroute to map
       if (res.status === 200) {
         props.setUser({ name, email, picture, id: res.data });
