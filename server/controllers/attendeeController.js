@@ -9,8 +9,8 @@ attendeeController.addAttendee = async (req, res, next) => {
   // need to get the user ID from req.body
   // need to figure out how to manage duplicate entries
   console.log('inside of addAttendee');
-  const { eventID } = req.params;
-  const { userId } = req.body;
+  const { eventId } = req.body;
+  const { userId } = req.params;
   // console.log(`REQ BODY HERE: `, req.body);
   // const addAttendeeQuery = 'INSERT INTO attendees (users_id, events_id) VALUES ($1, $2)';
   const addAttendeeQuery = `
@@ -22,7 +22,7 @@ attendeeController.addAttendee = async (req, res, next) => {
       WHERE users_id = $1 AND events_id = $2
     )
   `;
-  const newAttendeeRow = [userId, +eventID];
+  const newAttendeeRow = [userId, +eventId];
   console.log(newAttendeeRow);
   try {
     console.log('SOMETHING');
@@ -80,12 +80,11 @@ attendeeController.getAttendees = async (req, res, next) => {
 // delete attendees from attendee table
 attendeeController.deleteAttendee = async (req, res, next) => {
   try {
-    const { userId } = req.body;
-    const { eventID } = req.params;
+    const { userId } = req.params;
+    const { eventId } = req.body;
     const deleteQuery = 'DELETE FROM attendees WHERE events_id = $1 AND users_id = $2';
-    const values = [ eventID, userId ]
+    const values = [ eventId, userId ]
     await db.query(deleteQuery, values);
-    console.log(`deleted ${userId} event at ${eventID}`)
     return next();
   } catch (error) {
       return next({
