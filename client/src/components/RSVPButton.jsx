@@ -12,10 +12,12 @@ function RSVPButton(props) {
   } else buttonText = 'RSVP';
 
   async function handleClick(e) {
-    const messageBody = { eventId: props.eventData.id };
+    let messageBody = { eventId: props.eventData.id };
+    console.log('REMOVED EVENT IS: ', messageBody)
     let response;
     try {
       if (deleteRSVP) {
+        messageBody = {data: messageBody};
         response = await axios.delete(
           `/api/attendees/${props.user.id}`,
           messageBody

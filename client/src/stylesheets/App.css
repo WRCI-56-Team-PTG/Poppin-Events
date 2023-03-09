@@ -65,7 +65,7 @@ button {
 .map-container {
   min-width: 700px;
   min-height: 700px;
-  margin: 0 30px;
+  margin:
 }
 
 .box-shadow-1 {
@@ -219,6 +219,9 @@ a:hover {
   /* outline: 2px solid gold; */
   display: flex;
   margin: 0;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
 
 }
 
