@@ -71,9 +71,10 @@ router.get('/attendees/:eventID',
 // stretch goal
 router.delete('/attendees/:userId',
   attendeeController.deleteAttendee,
+  eventController.getUsersEvents,
   (req, res) => {
     // should we return the deletedAttendee?
-    res.sendStatus(200)
+    return res.status(200).json(res.locals.usersEvents)
   },
 );
 
