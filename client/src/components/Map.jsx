@@ -4,9 +4,7 @@ import { GoogleMap, useJsApiLoader, MarkerF } from '@react-google-maps/api';
 
 import axios from 'axios';
 import MarkerCreator from './MarkerCreator';
-import MarkerUpdator from './MarkerUpdator';
 import { UserContext } from './UserContext';
-import RSVPButton from './RSVPButton.jsx';
 import EventList from './EventList.jsx';
 import EventInfo from './EventInfo.jsx';
 
