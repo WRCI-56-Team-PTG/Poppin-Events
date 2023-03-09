@@ -37,3 +37,22 @@
 
 .marker-updator__modal {
 }
+
+.attendeeList {
+  margin-top: 5px;
+  display: flex;
+  flex-direction: column;
+}
+
+.attendeeInfo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+}
+
+.attendeeAvatar {
+  width: 24px;
+  border-radius: 12px;
+  margin: 2px;
+}
