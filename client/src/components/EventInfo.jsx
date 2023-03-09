@@ -10,6 +10,7 @@ const EventInfo = function ({
   handleUpdate,
   eventData,
   user,
+  userEventList,
   setUserEventList,
   setEventData,
   setUpdating,
@@ -69,6 +70,7 @@ const EventInfo = function ({
               <RSVPButton
                 eventData={eventData}
                 user={user}
+                userEventList={userEventList}
                 setUserEventList={setUserEventList}
               />
               <button

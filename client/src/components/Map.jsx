@@ -57,7 +57,6 @@ function Map() {
         try {
           const response = await axios.get(`/api/userEventData/${userId}`);
           const { data } = response;
-          console.log(`DATA TO CHECK USEREVENTLIST: `, data);
           setUserEventList(data);
         } catch (e) {
           console.log('error in getUserEventData: ', e.message);
@@ -199,6 +198,7 @@ function Map() {
             handleUpdate={handleUpdate}
             eventData={eventData}
             user={user}
+            userEventList={userEventList}
             setUserEventList={setUserEventList}
             setEventData={setEventData}
             setUpdating={setUpdating}
