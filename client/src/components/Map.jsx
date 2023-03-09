@@ -214,6 +214,7 @@ function Map() {
               <RSVPButton
                 eventData={eventData}
                 user={user}
+                userEventList={userEventList}
                 setUserEventList={setUserEventList}
               />
             )}

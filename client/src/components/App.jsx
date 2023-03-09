@@ -10,10 +10,9 @@ import { Routes, Route, useNavigate } from 'react-router-dom';
 function App(props) {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
-  console.log('in APP, user is: ', user);
 
   useEffect(() => {
-    console.log('in useEffect, and user is: ', user);
+
     const checkSession = async () => {
       try {
         const userInfo = await axios.get('/api/sessions');
@@ -33,10 +32,8 @@ function App(props) {
       }
     };
     if (user === null) {
-      console.log('user is null');
       checkSession();
     } else {
-      console.log('user is not null');
       navigate('/map');
     }
   }, [user]);

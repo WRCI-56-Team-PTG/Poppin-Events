@@ -18,16 +18,19 @@ button {
 }
 
 .edit-button,
-.delete-button,
-.rsvp-button {
+.delete-button{
   width: 100px;
   height: 30px;
 }
 .edit-button {
   margin-right: 10px;
 }
+
+.rsvp-button {
+  padding: 10px;
+}
+
 #root {
-  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -49,7 +52,7 @@ button {
   height: min-content;
   text-align: center;
   padding: 20px;
-  min-width: 300px;
+  width: 300px;
   margin-top: 20px;
 }
 .event-title {
@@ -205,7 +208,8 @@ a:hover {
 .map-section {
   /* outline: 2px solid gold; */
   display: flex;
-  width: 80%;
+  margin: 0;
+
 }
 
 .current-location-button {
@@ -234,23 +238,30 @@ button:hover,
 
 .event-list-item {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1.4fr 1fr .7fr;
   border: 1px black solid;
   border-radius: 3px;
   padding: 0 10px;
+
 }
 
 .event-list-item-data {
   display: flex;
   flex-direction: column;
   align-items: start;
+  overflow: hidden;
+  white-space: nowrap;
+
 }
 
 .small-titles {
   color: gray;
   margin: 0;
+  font-size: 10px;
 }
 
 .small-text {
   margin: 0;
+  font-size: 13px;
+
 }
