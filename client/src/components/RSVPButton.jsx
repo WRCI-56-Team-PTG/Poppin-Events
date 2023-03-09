@@ -13,15 +13,15 @@ function RSVPButton(props) {
 
   async function handleClick(e) {
     const messageBody = { userId: props.user.id };
-
+    let response;
     try {
       if (deleteRSVP) {
-        const response = await axios.delete(
+        response = await axios.delete(
           `/api/attendees/${props.eventData.id}`,
           messageBody
         );
       } else {
-        const response = await axios.post(
+        response = await axios.post(
           `/api/attendees/${props.eventData.id}`,
           messageBody
         );
