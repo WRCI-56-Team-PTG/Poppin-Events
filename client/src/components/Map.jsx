@@ -8,6 +8,7 @@ import MarkerUpdator from './MarkerUpdator';
 import { UserContext } from './UserContext';
 import RSVPButton from './RSVPButton.jsx';
 import EventList from './EventList.jsx';
+import EventInfo from './EventInfo.jsx';
 
 function Map() {
   // state for map center positioning
@@ -31,6 +32,8 @@ function Map() {
   const [updating, setUpdating] = useState(false);
   // in-the-works refactor to clarify userID vs eventID from .id
   const userID = user === null ? null : user.id;
+
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
 
   // Load the script for google maps API
   const { isLoaded } = useJsApiLoader({
@@ -121,6 +124,12 @@ function Map() {
     setEventData(null);
   };
 
+  const openCreateModal = () => {
+    //set isCreateModalOpen to true
+    setIsCreateModalOpen(true);
+    setEventData(null);
+  };
+
   // ensures that a div exists for the map even when the map API key is not loaded successfully. DO NOT DELETE
   if (!isLoaded) return <div>Loading... 🥺</div>;
   // <GoogleMap><GoogleMap /> component imported from @react-google-maps/api used to render google maps
@@ -138,6 +147,9 @@ function Map() {
             user={user}
           />
         )}
+        <button className="map__create-event-btn" onClick={openCreateModal}>
+          Create Own Event
+        </button>
       </div>
       <GoogleMap
         zoom={14}
@@ -158,66 +170,42 @@ function Map() {
               key={event.id}
               title={event.name}
               position={event.location[0]}
-              onClick={() => setEventData(event)}
+              onClick={() => {
+                setEventData(event);
+                setIsCreateModalOpen(false);
+              }}
             />
           ))}
       </GoogleMap>
       {/* If a Marker is being added, call MarkerCreator and if updated, call MarkerUpdator */}
       <div className="right-section">
-        {!updating && <MarkerCreator setMarkerData={setMarkerData} />}
-        {updating && (
+        {!updating && isCreateModalOpen && !eventData && (
+          <MarkerCreator
+            setMarkerData={setMarkerData}
+            setIsCreateModalOpen={setIsCreateModalOpen}
+          />
+        )}
+        {/* {updating && (
           <MarkerUpdator
             eventData={eventData}
             setEventData={setEventData}
             setUpdating={setUpdating}
             setMarkerData={setMarkerData}
           />
-        )}
+        )} */}
         {/* If eventData and user are not null, display the event data */}
         {eventData && user && (
-          <div className="info-container box-shadow-1">
-            <h2 className="event-title">{eventData.name}</h2>
-            <p className="event-description"> {eventData.description}</p>
-            <ul className="info-list">
-              <li className="info-list-item">
-                Organizer: {eventData.organizer}
-              </li>
-              <li className="info-list-item">Location: {eventData.address}</li>
-              <li className="info-list-item">
-                Date: {new Date(eventData.date).toLocaleString()}
-              </li>
-              <li className="info-list-item">RSVP: {eventData.email}</li>
-            </ul>
-            {/* If the user is the creator of the event, display the edit and delete buttons */}
-            {eventData.email === user.email && (
-              <div className="event-buttons-container">
-                <button
-                  className="edit-button "
-                  type="button"
-                  onClick={handleUpdate}
-                >
-                  {' '}
-                  Edit{' '}
-                </button>
-                <button
-                  className="delete-button"
-                  type="button"
-                  onClick={() => handleDelete(eventData.id, user.id)}
-                >
-                  {' '}
-                  Delete{' '}
-                </button>
-              </div>
-            )}
-            {/* Otherwise, display the RSVP component */}
-            {eventData.email !== user.email && (
-              <RSVPButton
-                eventData={eventData}
-                user={user}
-                setUserEventList={setUserEventList}
-              />
-            )}
-          </div>
+          <EventInfo
+            handleUpdate={handleUpdate}
+            eventData={eventData}
+            user={user}
+            setUserEventList={setUserEventList}
+            setEventData={setEventData}
+            setUpdating={setUpdating}
+            setMarkerData={setMarkerData}
+            updating={updating}
+            handleDelete={handleDelete}
+          />
         )}
       </div>
     </div>

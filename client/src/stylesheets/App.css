@@ -85,6 +85,16 @@ button {
   width: 300px;
 }
 
+.create-event-container--modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -48%);
+  z-index: 201;
+  background-image: url('https://img.freepik.com/free-vector/hand-painted-watercolor-pastel-sky-background_23-2148902028.jpg?w=1800&t=st=1678152616~exp=1678153216~hmac=74aded69431c66906454ac1c5b72d32320d4b96356014ce1c1940c26d3ac63e0');
+  background-size: cover;
+}
+
 .event-list-cont {
   display: flex;
   flex-direction: column;
@@ -205,6 +215,7 @@ a:hover {
 .map-section {
   /* outline: 2px solid gold; */
   display: flex;
+  justify-content: center;
   width: 80%;
 }
 
@@ -222,13 +233,13 @@ button {
   border: 1px solid rgb(126, 126, 126);
   transition: 0.15s ease;
 }
-button:hover, 
-.event-list-item:hover{
+button:hover,
+.event-list-item:hover {
   background: rgba(246, 255, 238, 0.853);
 }
 
-.delete-button:hover, 
-.cancel-button:hover{
+.delete-button:hover,
+.cancel-button:hover {
   background: rgba(255, 209, 220, 0.453);
 }
 
@@ -253,4 +264,12 @@ button:hover,
 
 .small-text {
   margin: 0;
+}
+
+.map__create-event-btn {
+  font-size: 18px;
+  font-weight: 500;
+  margin: 0 auto;
+  margin-top: 30px;
+  display: block;
 }
