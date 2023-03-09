@@ -9,7 +9,19 @@ eventController.getEvents = async (req, res, next) => {
   try {
     // select event information, using jsonb_agg to create a json object out of lat and lng by declaring key/value pairs
     const query = await db.query(
-      "SELECT e.id, e.name, e.description, e.date, e.loc_name AS locName, e.address, jsonb_agg(json_build_object('lat', e.lat, 'lng', e.lng)) AS location, u.name AS organizer, u.email, u.picture FROM events e LEFT OUTER JOIN users u ON e.organizer_id = u.id group by e.id, u.name, u.email, u.picture"
+      `SELECT 
+      e.id, e.name, 
+      e.description, 
+      e.date, 
+      e.loc_name AS locName, 
+      e.address, 
+      jsonb_agg(json_build_object('lat', e.lat, 'lng', e.lng)) AS location, 
+      u.name AS organizer, 
+      u.email, 
+      u.picture 
+      FROM events e 
+      LEFT OUTER JOIN users u 
+      ON e.organizer_id = u.id GROUP BY e.id, u.name, u.email, u.picture`
     );
     res.locals.events = query.rows;
     // query shape: {something: x, rows:[{data}, {data2}], blah: y, ....}
@@ -86,7 +98,7 @@ eventController.updateEvent = async (req, res, next) => {
 // delete an event from the database
 eventController.deleteEvent = async (req, res, next) => {
   const { eventID, userID } = req.body.deleteReq;
-  const values = [eventID, userID];
+  const values = [+eventID, +userID];
   const text = 'DELETE FROM events WHERE id = $1 AND organizer_id = $2';
   try {
     await db.query(text, values);
@@ -102,16 +114,22 @@ eventController.deleteEvent = async (req, res, next) => {
 // getting all the events associated BASED ON PARTICULAR USER
 eventController.getUsersEvents = async (req, res, next) => {
   const onlyEvents = [];
+<<<<<<< HEAD
   const { userId } = req.params;
   const getUsersQuery = 'SELECT events_id FROM attendees WHERE users_id = $1';
   const values = [userId];
+=======
+  const { userID } = req.params;
+  const getUsersQuery = 'SELECT events_id FROM attendees WHERE users_id = ($1)';
+  const values = [+userID];
+>>>>>>> dev
   try {
     const usersEvents = await db.query(getUsersQuery, values);
     usersEvents.rows.map((event) => {
       onlyEvents.push(event.events_id);
       return onlyEvents;
     });
-    console.log(onlyEvents);
+    console.log('EVENTS BEING RETURNED BY DB', onlyEvents);
     res.locals.usersEvents = onlyEvents;
     return next();
   } catch (error) {
@@ -131,8 +149,13 @@ eventController.getEvents2 = async (req, res, next) => {
   // console.log('WHY ARE YOU NOT PRINTING');
   const onlyEvents = [];
   const { userId } = req.body;
+<<<<<<< HEAD
   const getUsersQuery = 'SELECT events_id FROM attendees WHERE users_id = $1';
   const values = [userId];
+=======
+  const getUsersQuery = 'SELECT events_id FROM attendees WHERE users_id = ($1)';
+  const values = [+userId];
+>>>>>>> dev
   try {
     const usersEvents = await db.query(getUsersQuery, values);
     usersEvents.rows.map((event) => {
@@ -143,7 +166,7 @@ eventController.getEvents2 = async (req, res, next) => {
     return next();
   } catch (error) {
     return next({
-      log: 'eventController.getUsersEvents error',
+      log: 'eventController.getUsersEvents2 error',
       message: { err: 'Error getting all of users events from database' },
     });
   }

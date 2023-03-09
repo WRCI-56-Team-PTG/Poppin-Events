@@ -111,7 +111,7 @@ export default function MarkerUpdator(props) {
   }
 
   return (
-    <div className="create-event-container box-shadow-1">
+    <div className="create-event-container box-shadow-1 marker-updator__modal">
       <h4>Edit your Event</h4>
       <form id="add-event" className="create-form" onSubmit={handleSubmit}>
         <label className="screen-reader-text" htmlFor="event-name">
