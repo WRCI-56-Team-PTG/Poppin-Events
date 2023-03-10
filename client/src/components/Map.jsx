@@ -40,6 +40,16 @@ function Map() {
     libraries: ['places'],
   });
 
+  // if eventData changes, change the map position
+  useEffect(() => {
+    if (eventData) {
+      setMapPos({
+        lat: eventData.location[0].lat,
+        lng: eventData.location[0].lng
+      })
+    }
+  }, [eventData])
+
   // get all marker data from database on mount
   useEffect(() => {
     try {
@@ -67,16 +77,20 @@ function Map() {
     }
 
     // get current user location and set the center of the map to that location
-    if (navigator.geolocation) {
-      // native browser geolocation functionality
-      navigator.geolocation.getCurrentPosition((position) => {
-        const pos = {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude,
-        };
-        // change map center positioning state
-        setMapPos(pos);
-      });
+    try {
+      if (navigator.geolocation) {
+        // native browser geolocation functionality
+        navigator.geolocation.getCurrentPosition((position) => {
+          const pos = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          };
+          // change map center positioning state
+          setMapPos(pos);
+        });
+      }
+    } catch (e) {
+      console.log('error with geolocating: ', e.message)
     }
   }, []);
 
