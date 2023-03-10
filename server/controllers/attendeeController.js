@@ -68,9 +68,10 @@ attendeeController.getAttendees = async (req, res, next) => {
 attendeeController.deleteAttendee = async (req, res, next) => {
   try {
     const { userId } = req.params;
+    console.log('IN CONTROLLER, THIS IS THE REQ.BODY', req.body)
     const { eventId } = req.body;
     const deleteQuery = 'DELETE FROM attendees WHERE events_id = $1 AND users_id = $2';
-    const values = [ eventId, userId ]
+    const values = [ +eventId, +userId ]
     await db.query(deleteQuery, values);
     return next();
   } catch (error) {

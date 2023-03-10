@@ -116,7 +116,7 @@ eventController.getUsersEvents = async (req, res, next) => {
   const onlyEvents = [];
   const { userId } = req.params;
   const getUsersQuery = 'SELECT events_id FROM attendees WHERE users_id = $1';
-  const values = [userId];
+  const values = [+userId];
   try {
     const usersEvents = await db.query(getUsersQuery, values);
     usersEvents.rows.map((event) => {
