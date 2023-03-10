@@ -62,28 +62,16 @@ attendeeController.getAttendees = async (req, res, next) => {
       },
     });
   }
-
-  // db.query(query, value)
-  //   .then((data) => {
-  //     res.locals.eventsAttendees = data;
-  //     console.log('line 40');
-  //     return next();
-  //   })
-  //   .catch((err) => {return next({
-  //     log: 'error in attendeeController.getAttendees',
-  //     message: {
-  //       err,
-  //     },
-  //   })});
 };
 
 // delete attendees from attendee table
 attendeeController.deleteAttendee = async (req, res, next) => {
   try {
     const { userId } = req.params;
+    console.log('IN CONTROLLER, THIS IS THE REQ.BODY', req.body)
     const { eventId } = req.body;
     const deleteQuery = 'DELETE FROM attendees WHERE events_id = $1 AND users_id = $2';
-    const values = [ eventId, userId ]
+    const values = [ +eventId, +userId ]
     await db.query(deleteQuery, values);
     return next();
   } catch (error) {
@@ -93,5 +81,24 @@ attendeeController.deleteAttendee = async (req, res, next) => {
       })
   }
 };
+
+// delete all attendees from a particular event
+attendeeController.deleteAllAttendees = async (req, res, next) => {
+  try {
+    const { eventID } = req.body.deleteReq;
+    console.log(eventID);
+    const deleteAllQuery = 'DELETE FROM attendees WHERE events_id = $1';
+    const value = [+eventID];
+    await db.query(deleteAllQuery, value);
+    return next();
+  } catch (error) {
+    return next({
+      log: 'attendeeController.deleteAllAttendees error',
+      message: { err: `Error deleting all attendees from event in database`}
+    })
+  }
+}
+
+
 
 module.exports = attendeeController;
