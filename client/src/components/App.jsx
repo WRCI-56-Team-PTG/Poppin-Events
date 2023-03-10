@@ -16,7 +16,7 @@ function App(props) {
     const checkSession = async () => {
       try {
         const userInfo = await axios.get('/api/sessions');
-        console.log('user info is: ', userInfo);
+
         if (userInfo.data.loggedIn === true) {
           setUser({
             name: userInfo.data.name,

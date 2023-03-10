@@ -48,36 +48,35 @@ function Map() {
         const response = await axios.get('/api/events');
         const { data } = response;
         setMarkerData(data);
-      };
-
-      // get all events that user is attending and throw into state
-      const getUserEventData = async (userId) => {
-        try {
-          const response = await axios.get(`/api/userEventData/${userId}`);
-          const { data } = response;
-          setUserEventList(data);
-        } catch (e) {
-          console.log('error in getUserEventData: ', e.message);
-        }
-      };
-
-      getEvents();
-      getUserEventData(user.id);
-
-      // get current user location and set the center of the map to that location
-      if (navigator.geolocation) {
-        // native browser geolocation functionality
-        navigator.geolocation.getCurrentPosition((position) => {
-          const pos = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-          };
-          // change map center positioning state
-          setMapPos(pos);
-        });
-      }
+      } 
+      getEvents()
     } catch (e) {
       console.log('error in getEvents: ', e.message);
+    }
+
+      // get all events that user is attending and throw into state
+    try {
+      const getUserEventData = async (userId) => {
+        const response = await axios.get(`/api/userEventData/${userId}`);
+        const { data } = response;
+        setUserEventList(data);
+      };
+      getUserEventData(user.id);
+    } catch (e) {
+      console.log('error in getUserEventData: ', e.message);
+    }
+
+    // get current user location and set the center of the map to that location
+    if (navigator.geolocation) {
+      // native browser geolocation functionality
+      navigator.geolocation.getCurrentPosition((position) => {
+        const pos = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        };
+        // change map center positioning state
+        setMapPos(pos);
+      });
     }
   }, []);
 

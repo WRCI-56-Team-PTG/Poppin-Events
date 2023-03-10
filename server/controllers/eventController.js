@@ -114,15 +114,9 @@ eventController.deleteEvent = async (req, res, next) => {
 // getting all the events associated BASED ON PARTICULAR USER
 eventController.getUsersEvents = async (req, res, next) => {
   const onlyEvents = [];
-<<<<<<< HEAD
   const { userId } = req.params;
   const getUsersQuery = 'SELECT events_id FROM attendees WHERE users_id = $1';
-  const values = [userId];
-=======
-  const { userID } = req.params;
-  const getUsersQuery = 'SELECT events_id FROM attendees WHERE users_id = ($1)';
-  const values = [+userID];
->>>>>>> dev
+  const values = [+userId];
   try {
     const usersEvents = await db.query(getUsersQuery, values);
     usersEvents.rows.map((event) => {
@@ -149,13 +143,8 @@ eventController.getEvents2 = async (req, res, next) => {
   // console.log('WHY ARE YOU NOT PRINTING');
   const onlyEvents = [];
   const { userId } = req.body;
-<<<<<<< HEAD
   const getUsersQuery = 'SELECT events_id FROM attendees WHERE users_id = $1';
   const values = [userId];
-=======
-  const getUsersQuery = 'SELECT events_id FROM attendees WHERE users_id = ($1)';
-  const values = [+userId];
->>>>>>> dev
   try {
     const usersEvents = await db.query(getUsersQuery, values);
     usersEvents.rows.map((event) => {
