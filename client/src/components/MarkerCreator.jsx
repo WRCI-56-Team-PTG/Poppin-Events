@@ -1,4 +1,5 @@
-import React, { useState, useContext, useRef} from 'react';
+import React, { useState, useContext, useRef } from 'react';
+import ReactDOM from 'react-dom';
 import axios from 'axios';
 import { useJsApiLoader } from '@react-google-maps/api';
 import { UserContext } from './UserContext';
@@ -38,13 +39,17 @@ export default function MarkerCreator(props) {
       // encode the address
       const encoded = address.replaceAll(' ', '+');
       // geocode the address (https://developers.google.com/maps/documentation/geocoding/requests-geocoding)
-      const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${encoded}&key=${import.meta.env.VITE_GOOGLE_MAPS_API_KEY}`;
+      const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${encoded}&key=${
+        import.meta.env.VITE_GOOGLE_MAPS_API_KEY
+      }`;
       const response = await axios.get(url);
       const data = response.data.results[0];
-      event.location = [{
-        lat: data.geometry.location.lat,
-        lng: data.geometry.location.lng,
-      }];
+      event.location = [
+        {
+          lat: data.geometry.location.lat,
+          lng: data.geometry.location.lng,
+        },
+      ];
       // send the post request to the server
       const eventID = await axios.post('/api/events', event);
       // add other pairs to the event object for the front-end to read
@@ -52,9 +57,10 @@ export default function MarkerCreator(props) {
       event.email = email;
       event.organizer = username;
       // add the new event into state (from parent component) to rerender the map + markers
-      props.setMarkerData(prevMarkerData => {
+      props.setMarkerData((prevMarkerData) => {
         return [...prevMarkerData, event];
       });
+      props.setIsCreateModalOpen(false);
     } catch (err) {
       console.log('error in post: ', err.message);
     }
@@ -69,26 +75,53 @@ export default function MarkerCreator(props) {
   // autocomplete change handler
   function handleChange() {
     console.log('autocomplete is currently: ', autocomplete);
-    if(autocomplete !== null) console.log('autocomplete place is: ', autocomplete.getPlace());
+    if (autocomplete !== null)
+      console.log('autocomplete place is: ', autocomplete.getPlace());
   }
 
+  const closeMarkerCreatorHandler = () => {
+    //set isMarkerCreatorModalOpen to false
+    props.setIsCreateModalOpen(false);
+  };
+
   // <Autocomplete /> component imported from @react-google-maps/api to have autocomplete address
-  return (
-    <div className="create-event-container box-shadow-1">
+  return ReactDOM.createPortal(
+    <div className="create-event-container box-shadow-1 create-event-container--modal">
       <h4>Create an Event</h4>
       <form id="add-event" className="create-form" onSubmit={handleSubmit}>
         <label className="screen-reader-text" htmlFor="event-name">
           Name your event:
         </label>
-        <input placeholder="Name" id="event-name" type="text" onChange={(e) => setName(e.target.value)} value={name} required />
+        <input
+          placeholder="Name"
+          id="event-name"
+          type="text"
+          onChange={(e) => setName(e.target.value)}
+          value={name}
+          required
+        />
         <label className="screen-reader-text" htmlFor="event-description">
           Describe your event:
         </label>
-        <input placeholder="Description" id="event-description" type="text" onChange={(e) => setDescription(e.target.value)} value={description} required />
+        <input
+          placeholder="Description"
+          id="event-description"
+          type="text"
+          onChange={(e) => setDescription(e.target.value)}
+          value={description}
+          required
+        />
         <label className="screen-reader-text" htmlFor="event-location">
           Event Location:
         </label>
-        <input placeholder="Location" id="event-location" type="text" onChange={(e) => setLocName(e.target.value)} value={locName} required />
+        <input
+          placeholder="Location"
+          id="event-location"
+          type="text"
+          onChange={(e) => setLocName(e.target.value)}
+          value={locName}
+          required
+        />
         <label className="screen-reader-text" htmlFor="event-address">
           Event Address:
         </label>
@@ -103,9 +136,23 @@ export default function MarkerCreator(props) {
         <label className="screen-reader-text" htmlFor="event-date">
           Date:
         </label>
-        <input placeholder="Date and time" id="event-date" type="datetime-local" onChange={(e) => setDate(e.target.value)} value={date} required />
+        <input
+          placeholder="Date and time"
+          id="event-date"
+          type="datetime-local"
+          onChange={(e) => setDate(e.target.value)}
+          value={date}
+          required
+        />
         <button className="button-primary">Submit</button>
+        <button
+          className="event-info__close-btn--rsvp"
+          onClick={closeMarkerCreatorHandler}
+        >
+          X
+        </button>
       </form>
-    </div>
+    </div>,
+    document.getElementById(`modal`)
   );
 }

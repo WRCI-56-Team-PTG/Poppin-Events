@@ -2,6 +2,7 @@ const express = require('express');
 const userController = require('../controllers/userController');
 const eventController = require('../controllers/eventController');
 const sessionController = require('../controllers/sessionController');
+const attendeeController = require('../controllers/attendeeController');
 
 const router = express.Router();
 
@@ -43,8 +44,38 @@ router.put(
 // Delete an event in the database
 router.delete(
   '/events',
+  attendeeController.deleteAllAttendees,
   eventController.deleteEvent,
   (req, res) => res.sendStatus(200),
+);
+
+router.get('/userEventData/:userId',
+  eventController.getUsersEvents,
+  (req, res) => res.status(200).json(res.locals.usersEvents),
+);
+
+// Create an attendee in the database
+router.post('/attendees/:userId',
+  attendeeController.addAttendee,
+  eventController.getUsersEvents,
+  (req, res) => res.status(200).json(res.locals.usersEvents),
+);
+
+// Get the list of attendees for an event
+router.get('/attendees/:eventID',
+  attendeeController.getAttendees,
+  (req, res) => {
+    return res.status(200).json(res.locals.eventsAttendees);
+  }
+);
+
+// delete user as an attendee from an event
+router.delete('/attendees/:userId',
+  attendeeController.deleteAttendee,
+  eventController.getUsersEvents,
+  (req, res) => {
+    return res.status(200).json(res.locals.usersEvents);
+  },
 );
 
 // Checks for active sessions

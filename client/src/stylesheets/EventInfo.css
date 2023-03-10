@@ -1,0 +1,69 @@
+.event-info-n-marker-updator__modal-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -48%);
+  display: flex;
+  /* flex-direction: column; */
+  align-items: center;
+  gap: 20px;
+  /* background-color: red; */
+  /* background-image: url('https://img.freepik.com/free-vector/hand-painted-watercolor-pastel-sky-background_23-2148902028.jpg?w=1800&t=st=1678152616~exp=1678153216~hmac=74aded69431c66906454ac1c5b72d32320d4b96356014ce1c1940c26d3ac63e0'); */
+  /* background-size: cover; */
+  z-index: 201;
+}
+
+.event-info__modal-container,
+.marker-updator__modal {
+  /* height: 100%;
+  width: 100%; */
+  /* position: fixed; */
+  /* top: 50%; */
+  /* left: 50%; */
+  /* transform: translate(-50%, -50%); */
+  /* background-color: red; */
+  
+  background-color: rgb(243, 227, 253);
+  box-sizing: border-box;
+  border-radius: 3px;
+  /* z-index: 201; */
+}
+
+.event-info__modal-container {
+  position: relative;
+}
+
+.event-info__close-btn {
+  margin-left: 10px;
+}
+
+.event-info__close-btn--rsvp {
+  margin-top: 10px;
+}
+
+.marker-updator__modal {
+  position: relative;
+}
+
+.attendeeList {
+  margin-top: 5px;
+  display: flex;
+  flex-direction: column;
+}
+
+.attendeeInfo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+}
+
+.attendeeAvatar {
+  width: 24px;
+  border-radius: 12px;
+  margin: 2px;
+}
+
+.subEventList {
+  margin: 10px 0px;
+}
