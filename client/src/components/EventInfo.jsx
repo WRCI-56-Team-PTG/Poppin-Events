@@ -33,7 +33,7 @@ const EventInfo = function ({
         setAttendeesList(response.data);
       })
       .catch((err) => {
-        console.log('err is', err);
+        console.log('err getting atten', err);
       });
   }, []);
 
@@ -48,16 +48,16 @@ const EventInfo = function ({
           <h2 className="event-title">{eventData.name}</h2>
           <p className="event-description"> {eventData.description}</p>
           <ul className="info-list">
-            <li className="info-list-item">Organizer: {eventData.organizer}</li>
-            <li className="info-list-item">Location: {eventData.address}</li>
+            <li className="info-list-item"><b>Organizer:</b> {eventData.organizer}</li>
+            <li className="info-list-item"><b>Location: </b>{eventData.address}</li>
             <li className="info-list-item">
-              Date: {new Date(eventData.date).toLocaleString()}
+              <b>Date: </b>{new Date(eventData.date).toLocaleString()}
             </li>
-            <li className="info-list-item">RSVP: {eventData.email}</li>
+            <li className="info-list-item"><b>RSVP: </b>{eventData.email}</li>
           </ul>
           {/* Show the see attendees button regardless of whether user is host of event */}
-          <div>
-            <button onClick={toggleModal}>{showAttendees ? "Hide Attendees" : "See Attendees"}</button>
+          <div className='view-info-button-cont'>
+            <button className='edit-button' onClick={toggleModal}>{showAttendees ? "Hide Attendees" : "See Attendees"}</button>
             {showAttendees && (
               <div className="attendeeList">
                 {attendeesList.length === 0 && (
@@ -92,10 +92,10 @@ const EventInfo = function ({
                 Delete{' '}
               </button>
               <button
-                className="event-info__close-btn delete-button"
+                className="event-info__close-btn--rsvp"
                 onClick={closeEditInfoHandler}
               >
-                Close
+                X
               </button>
             </div>
           )}
@@ -112,7 +112,7 @@ const EventInfo = function ({
                 className="event-info__close-btn--rsvp"
                 onClick={closeEditInfoHandler}
               >
-                Close
+                X
               </button>
             </>
           )}

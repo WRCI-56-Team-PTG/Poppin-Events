@@ -4,7 +4,7 @@
   left: 50%;
   transform: translate(-50%, -48%);
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
   align-items: center;
   gap: 20px;
   /* background-color: red; */
@@ -22,9 +22,15 @@
   /* left: 50%; */
   /* transform: translate(-50%, -50%); */
   /* background-color: red; */
-  background-image: url('https://img.freepik.com/free-vector/hand-painted-watercolor-pastel-sky-background_23-2148902028.jpg?w=1800&t=st=1678152616~exp=1678153216~hmac=74aded69431c66906454ac1c5b72d32320d4b96356014ce1c1940c26d3ac63e0');
-  background-size: cover;
+  
+  background-color: rgb(243, 227, 253);
+  box-sizing: border-box;
+  border-radius: 3px;
   /* z-index: 201; */
+}
+
+.event-info__modal-container {
+  position: relative;
 }
 
 .event-info__close-btn {
@@ -36,6 +42,7 @@
 }
 
 .marker-updator__modal {
+  position: relative;
 }
 
 .attendeeList {

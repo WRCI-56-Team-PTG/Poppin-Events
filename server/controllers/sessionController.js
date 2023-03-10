@@ -18,7 +18,7 @@ sessionController.validateSession = (req, res, next) => {
 };
 sessionController.deleteSession = (req, res, next) => {
   console.log('deleting session...');
-  req.session.destroy(e => console.log('LOLLLLLLLLLLLLLLLLLLLLLL', e));
+  req.session.destroy(e => console.log('session was destroyed', e));
   next();
 };
 

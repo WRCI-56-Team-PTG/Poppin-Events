@@ -35,7 +35,7 @@ function RSVPButton(props) {
   }
 
   return (
-    <button className="rsvp-button" onClick={handleClick}>
+    <button className="edit-button rsvp-button" onClick={handleClick}>
       {buttonText}
     </button>
   );

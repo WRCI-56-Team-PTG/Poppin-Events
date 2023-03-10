@@ -53,7 +53,7 @@ eventController.createEvent = async (req, res, next) => {
       lng,
       userID,
     ];
-    console.log('hello we made it here');
+    
     const newEvent = await db.query(addEventQuery, newEventVals);
     // **note - that rows[0] will actually be an OBJECT containing {id: <some number>} ** !
     res.locals.id = newEvent.rows[0];

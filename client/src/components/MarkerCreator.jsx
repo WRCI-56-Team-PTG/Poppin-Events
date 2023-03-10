@@ -149,7 +149,7 @@ export default function MarkerCreator(props) {
           className="event-info__close-btn--rsvp"
           onClick={closeMarkerCreatorHandler}
         >
-          Close
+          X
         </button>
       </form>
     </div>,

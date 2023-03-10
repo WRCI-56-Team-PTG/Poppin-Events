@@ -4,7 +4,7 @@ body {
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
   padding-top: 80px;
-  background-image: url('https://img.freepik.com/free-vector/hand-painted-watercolor-pastel-sky-background_23-2148902028.jpg?w=1800&t=st=1678152616~exp=1678153216~hmac=74aded69431c66906454ac1c5b72d32320d4b96356014ce1c1940c26d3ac63e0');
+  background-image: url('https://img.freepik.com/free-vector/hand-painted-watercolor-pastel-sky-background_23-2148901818.jpg?w=1380&t=st=1678415929~exp=1678416529~hmac=1bc666d4aa49025f4246eb14d7266f452d05e1051b9bd1051000ff10c90fb8b3');
   background-size: cover;
 }
 
@@ -19,7 +19,7 @@ button {
 
 .edit-button,
 .delete-button{
-  width: 100px;
+  width: 120px;
   height: 30px;
 }
 .edit-button {
@@ -27,7 +27,7 @@ button {
 }
 
 .rsvp-button {
-  padding: 10px;
+  margin-top: 10px;
 }
 
 #root {
@@ -41,7 +41,12 @@ button {
 }
 
 .info-list {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
   list-style: none;
+  margin-left: -30px;
+
 }
 
 .info-container {
@@ -53,7 +58,8 @@ button {
   text-align: center;
   padding: 20px;
   width: 300px;
-  margin-top: 20px;
+
+
 }
 .event-title {
   margin-top: -4px;
@@ -94,7 +100,7 @@ button {
   left: 50%;
   transform: translate(-50%, -48%);
   z-index: 201;
-  background-image: url('https://img.freepik.com/free-vector/hand-painted-watercolor-pastel-sky-background_23-2148902028.jpg?w=1800&t=st=1678152616~exp=1678153216~hmac=74aded69431c66906454ac1c5b72d32320d4b96356014ce1c1940c26d3ac63e0');
+  background-color: rgb(243, 227, 253);
   background-size: cover;
 }
 
@@ -285,4 +291,24 @@ button:hover,
   margin: 0 auto;
   margin-top: 30px;
   display: block;
+}
+
+.event-info__close-btn--rsvp {
+  position: absolute;
+  right: 20px;
+  top: 10px;
+}
+
+.event-info__close-btn--rsvp:hover {
+  background: rgba(255, 209, 220, 0.453);
+}
+.event-buttons-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+h4 {
+  margin: 5px;
 }

@@ -23,11 +23,10 @@ attendeeController.addAttendee = async (req, res, next) => {
     )
   `;
   const newAttendeeRow = [userId, +eventId];
-  console.log(newAttendeeRow);
   try {
-    console.log('SOMETHING');
+    
     const response = await db.query(addAttendeeQuery, newAttendeeRow);
-    console.log('SOMETHING ELSE');
+    
     console.log('response is', response);
     res.locals.addedAttendee = response;
     return next();
@@ -41,7 +40,7 @@ attendeeController.addAttendee = async (req, res, next) => {
 
 // gets the list of attendees for an event, returning their
 attendeeController.getAttendees = async (req, res, next) => {
-  console.log('WILL THIS PRINT FOR GODS SAKE');
+  
   const { eventID } = req.params;
 
   const query =
@@ -49,9 +48,9 @@ attendeeController.getAttendees = async (req, res, next) => {
   const value = [+eventID];
 
   try {
-    console.log('SKDJfhakjdhfakjdhf');
+    
     const response = await db.query(query, value);
-    console.log(response);
+    
     res.locals.eventsAttendees = response.rows;
     return next();
   } catch (err) {
@@ -86,7 +85,7 @@ attendeeController.deleteAttendee = async (req, res, next) => {
 attendeeController.deleteAllAttendees = async (req, res, next) => {
   try {
     const { eventID } = req.body.deleteReq;
-    console.log(eventID);
+    
     const deleteAllQuery = 'DELETE FROM attendees WHERE events_id = $1';
     const value = [+eventID];
     await db.query(deleteAllQuery, value);

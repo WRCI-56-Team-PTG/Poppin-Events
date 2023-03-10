@@ -23,7 +23,6 @@ export default function MarkerUpdator(props) {
     props.eventData.locName ? props.eventData.locName : props.eventData.locname
   );
   let autocomplete = null;
-  console.log(props.eventData);
 
   // "2023-03-22T20:21:00.000Z" database format
   // 2023-03-22T20:21 date format
@@ -171,10 +170,10 @@ export default function MarkerUpdator(props) {
           value={date}
           required
         />
-        <button className="button-primary">Submit</button>
+        <button className="edit-button">Submit</button>
       </form>
-      <button className="cancel-button button-primary" onClick={cancelHandler}>
-        Cancel
+      <button className="event-info__close-btn--rsvp" onClick={cancelHandler}>
+        X
       </button>
     </div>
   );
