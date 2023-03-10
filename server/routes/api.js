@@ -74,12 +74,7 @@ router.delete('/attendees/:userId',
   attendeeController.deleteAttendee,
   eventController.getUsersEvents,
   (req, res) => {
-<<<<<<< HEAD
     res.sendStatus(200).json(res.locals.usersEvents);
-=======
-    // should we return the deletedAttendee?
-    return res.status(200).json(res.locals.usersEvents)
->>>>>>> dev
   },
 );
 
